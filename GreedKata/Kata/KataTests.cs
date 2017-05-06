@@ -32,6 +32,11 @@ namespace Kata
         [DataRow("1,1,1,3,3,3", 1300, DisplayName = "Values {1,1,1,3,3,3}")]
         [DataRow("1,1,1,1,2,3", 2000, DisplayName = "Values {1,1,1,1,2,3}")]
         [DataRow("6,6,6,6,4,2", 1200, DisplayName = "Values {6,6,6,6,4,2}")]
+        [DataRow("2,2,2,2,2,6", 800, DisplayName = "Values {2,2,2,2,2,6}")]
+        [DataRow("2,2,2,2,2,1", 900, DisplayName = "Values {2,2,2,2,2,6}")]
+        [DataRow("2,2,2,2,2,5", 850, DisplayName = "Values {2,2,2,2,2,6}")]
+        [DataRow("3,3,3,3,3,3", 2400, DisplayName = "Values {3,3,3,3,3,3}")]
+
         public void Given_ValidRoll(string arrayOfDice, int expectedScore)
         {
             List<int> diceValues = arrayOfDice.Split(',').Select(d => int.Parse(d)).ToList();

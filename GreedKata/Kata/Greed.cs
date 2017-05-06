@@ -40,15 +40,11 @@ namespace Kata
                 int scoreFromSingles = this.GetScoreFromSingles(dice);
 
                 int scoreFromTriples = this.GetScoreFromTriples(dice);
-
-                if(this.Has4ofakind(dice))
-                {
-                    scoreFromTriples = scoreFromTriples * 2;
-                }
-
-                score = 
-                        scoreFromSingles +
-                        scoreFromTriples;
+                int multiplierForTriples = this.GetTriplesMultiplier(dice);
+                               
+                score =
+                            scoreFromSingles +
+                            (scoreFromTriples * multiplierForTriples);
             }
 
             return score;
@@ -95,7 +91,7 @@ namespace Kata
             int score = 0;
 
             var groups = dice.GroupBy(x => x);
-            foreach(var group in groups.Where(g => g.Count() >=3 && g.Count() < 6))
+            foreach(var group in groups.Where(g => g.Count() >=3 && g.Count() <= 6))
             {
                 if (group.Key == 1)
                 {
@@ -110,11 +106,45 @@ namespace Kata
             return score;
         }
 
+        private int GetTriplesMultiplier(List<int> dice)
+        {
+            int multiplier = 1;
+
+            if (this.Has4ofakind(dice))
+            {
+                multiplier = 2;
+            }
+            else if (this.Has5ofakind(dice))
+            {
+                multiplier = 4;
+            }
+            else if (this.Has6ofakind(dice))
+            {
+                multiplier = 8;
+            }
+
+            return multiplier;
+        }
+
         private bool Has4ofakind(List<int> dice)
         {
             var groups = dice.GroupBy(x => x);
 
             return groups.Any(g => g.Count() == 4);
+        }
+
+        private bool Has5ofakind(List<int> dice)
+        {
+            var groups = dice.GroupBy(x => x);
+
+            return groups.Any(g => g.Count() == 5);
+        }
+
+        private bool Has6ofakind(List<int> dice)
+        {
+            var groups = dice.GroupBy(x => x);
+
+            return groups.Any(g => g.Count() == 6);
         }
     }
 }
