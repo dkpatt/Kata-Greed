@@ -37,14 +37,21 @@ namespace Kata
 
             if(this.CheckIfRollIsValid(dice))
             {
-                int scoreFromSingles = this.GetScoreFromSingles(dice);
+                if (this.IsThreePairs(dice))
+                {
+                    score = 800;
+                }
+                else
+                {
+                    int scoreFromSingles = this.GetScoreFromSingles(dice);
 
-                int scoreFromTriples = this.GetScoreFromTriples(dice);
-                int multiplierForTriples = this.GetTriplesMultiplier(dice);
-                               
-                score =
-                            scoreFromSingles +
-                            (scoreFromTriples * multiplierForTriples);
+                    int scoreFromTriples = this.GetScoreFromTriples(dice);
+                    int multiplierForTriples = this.GetTriplesMultiplier(dice);
+
+                    score =
+                                scoreFromSingles +
+                                (scoreFromTriples * multiplierForTriples);
+                }
             }
 
             return score;
@@ -64,6 +71,12 @@ namespace Kata
             }
 
             return true;
+        }
+
+        private bool IsThreePairs(List<int> dice)
+        {
+            var groups = dice.GroupBy(x => x);
+            return groups.Where(g => g.Count() == 2).Count() == 3;
         }
 
         private int GetScoreFromSingles(List<int> dice)

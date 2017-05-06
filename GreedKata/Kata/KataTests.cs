@@ -36,6 +36,8 @@ namespace Kata
         [DataRow("2,2,2,2,2,1", 900, DisplayName = "Values {2,2,2,2,2,6}")]
         [DataRow("2,2,2,2,2,5", 850, DisplayName = "Values {2,2,2,2,2,6}")]
         [DataRow("3,3,3,3,3,3", 2400, DisplayName = "Values {3,3,3,3,3,3}")]
+        [DataRow("3,3,4,4,5,5", 800, DisplayName = "Values {3,3,4,4,5,5}")]
+        [DataRow("1,1,4,4,5,5", 800, DisplayName = "Values {1,1,4,4,5,5}")]
 
         public void Given_ValidRoll(string arrayOfDice, int expectedScore)
         {
