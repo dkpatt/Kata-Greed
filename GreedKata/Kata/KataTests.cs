@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata
@@ -15,13 +18,72 @@ namespace Kata
         }
 
         [TestMethod]
-        public void Given_SingleOne()
+        [DataRow("1", DisplayName = "Values {1}")]
+        public void Given_ValidRoll(string arrayOfDice)
         {
-            var diceValues = new int[] { 1 };
-
+            List<int> diceValues = arrayOfDice.Split(',').Select(d => int.Parse(d)).ToList();
+        
             int score = this.greed.Score(diceValues);
 
             Assert.AreEqual(100, score);
         }
+
+        [TestMethod]
+        public void Given_InalidRoll_Null()
+        {
+            int score = this.greed.Score(null);
+
+            Assert.AreEqual(0, score);
+        }
+
+        [TestMethod]
+        public void Given_InalidRoll_Empty()
+        {
+            List<int> diceValues = new List<int>();
+
+            int score = this.greed.Score(diceValues);
+
+            Assert.AreEqual(0, score);
+        }
+
+        [TestMethod]
+        public void Given_InalidRoll_MoreThan6Dice()
+        {
+            List<int> diceValues = new List<int>();
+            diceValues.Add(1);
+            diceValues.Add(1);
+            diceValues.Add(1);
+            diceValues.Add(1);
+            diceValues.Add(1);
+            diceValues.Add(1);
+            diceValues.Add(1);
+
+            int score = this.greed.Score(diceValues);
+
+            Assert.AreEqual(0, score);
+        }
+
+        [TestMethod]
+        public void Given_InalidRoll_ValueLessThan1()
+        {
+            List<int> diceValues = new List<int>();
+            diceValues.Add(0);
+
+            int score = this.greed.Score(diceValues);
+
+            Assert.AreEqual(0, score);
+        }
+
+        [TestMethod]
+        public void Given_InalidRoll_ValueMoreThan6()
+        {
+            List<int> diceValues = new List<int>();
+            diceValues.Add(23);
+
+            int score = this.greed.Score(diceValues);
+
+            Assert.AreEqual(0, score);
+        }
+
     }
 }
