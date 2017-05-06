@@ -31,73 +31,64 @@ namespace Kata
         public Greed()
         { }
 
-        public int Score(List<int> diceValues)
+        public int Score(List<int> dice)
         {
-            if(this.CheckIfRollIsValid(diceValues))
+            if(this.CheckIfRollIsValid(dice))
             {
-                List<int> ones = diceValues.Where(d => d == 1).ToList();
-                List<int> twos = diceValues.Where(d => d == 2).ToList();
-                List<int> threes = diceValues.Where(d => d == 3).ToList();
-                List<int> fours = diceValues.Where(d => d == 4).ToList();
-                List<int> fives = diceValues.Where(d => d == 5).ToList();
-                List<int> sixes = diceValues.Where(d => d == 6).ToList();
+                List<int> ones = dice.Where(d => d == 1).ToList();
+                List<int> fives = dice.Where(d => d == 5).ToList();
 
                 if (ones.Count == 1)
                 {
                     return 100;
                 }
-                if(ones.Count == 3)
-                {
-                    return 1000;
-                }
-
-                if(twos.Count == 3)
-                {
-                    return 200;
-                }
-
-                if (threes.Count == 3)
-                {
-                    return 300;
-                }
-
-                if(fours.Count ==3 )
-                {
-                    return 400;
-                }
-                                
+                
                 if(fives.Count == 1)
                 {
                     return 50;
                 }
-                if(fives.Count == 3)
-                {
-                    return 500;
-                }
 
-                if (sixes.Count == 3)
-                {
-                    return 600;
-                }
+                int scoreFromTriples = this.GetScoreFromTriples(dice);
+                return scoreFromTriples;
             }
 
             return 0;
         }
 
-        private bool CheckIfRollIsValid(List<int> diceValues)
+        private bool CheckIfRollIsValid(List<int> dice)
         {
-            if(diceValues == null ||
-                diceValues.Count == 0 ||
-                diceValues.Count > 6)
+            if(dice == null ||
+                dice.Count == 0 ||
+                dice.Count > 6)
             {
                 return false;
             }
-            else if (diceValues.Any(d => d < 1 || d > 6))
+            else if (dice.Any(d => d < 1 || d > 6))
             {
                 return false;
             }
 
             return true;
+        }
+
+        private int GetScoreFromTriples(List<int> dice)
+        {
+            int score = 0;
+
+            var groups = dice.GroupBy(x => x);
+            foreach(var group in groups.Where(g => g.Count() >=3 && g.Count() < 6))
+            {
+                if (group.Key == 1)
+                {
+                    score += 1000;
+                }
+                else if (group.Key > 1)
+                {
+                    score += (group.Key * 100);
+                }                
+            }
+
+            return score;
         }
     }
 }
