@@ -41,6 +41,10 @@ namespace Kata
                 {
                     score = 800;
                 }
+                else if (this.IsStraight(dice))
+                {
+                    score = 1200;
+                }
                 else
                 {
                     int scoreFromSingles = this.GetScoreFromSingles(dice);
@@ -77,6 +81,15 @@ namespace Kata
         {
             var groups = dice.GroupBy(x => x);
             return groups.Where(g => g.Count() == 2).Count() == 3;
+        }
+        private bool IsStraight(List<int> dice)
+        {
+            return dice.Contains(1) &&
+                        dice.Contains(2) &&
+                        dice.Contains(3) &&
+                        dice.Contains(4) &&
+                        dice.Contains(5) &&
+                        dice.Contains(6);
         }
 
         private int GetScoreFromSingles(List<int> dice)

@@ -38,7 +38,7 @@ namespace Kata
         [DataRow("3,3,3,3,3,3", 2400, DisplayName = "Values {3,3,3,3,3,3}")]
         [DataRow("3,3,4,4,5,5", 800, DisplayName = "Values {3,3,4,4,5,5}")]
         [DataRow("1,1,4,4,5,5", 800, DisplayName = "Values {1,1,4,4,5,5}")]
-
+        [DataRow("1,2,3,4,5,6", 1200, DisplayName = "Values {1,2,3,4,5,6}")]
         public void Given_ValidRoll(string arrayOfDice, int expectedScore)
         {
             List<int> diceValues = arrayOfDice.Split(',').Select(d => int.Parse(d)).ToList();
