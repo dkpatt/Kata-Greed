@@ -136,41 +136,22 @@ namespace Kata
         {
             int multiplier = 1;
 
-            if (this.Has4ofakind(dice))
+            var groups = dice.GroupBy(x => x);
+
+            if (groups.Any(g => g.Count() == 4))
             {
                 multiplier = 2;
             }
-            else if (this.Has5ofakind(dice))
+            else if (groups.Any(g => g.Count() == 5))
             {
                 multiplier = 4;
             }
-            else if (this.Has6ofakind(dice))
+            else if (groups.Any(g => g.Count() == 6))
             {
                 multiplier = 8;
             }
 
             return multiplier;
-        }
-
-        private bool Has4ofakind(List<int> dice)
-        {
-            var groups = dice.GroupBy(x => x);
-
-            return groups.Any(g => g.Count() == 4);
-        }
-
-        private bool Has5ofakind(List<int> dice)
-        {
-            var groups = dice.GroupBy(x => x);
-
-            return groups.Any(g => g.Count() == 5);
-        }
-
-        private bool Has6ofakind(List<int> dice)
-        {
-            var groups = dice.GroupBy(x => x);
-
-            return groups.Any(g => g.Count() == 6);
         }
     }
 }
