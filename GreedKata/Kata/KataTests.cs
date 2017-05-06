@@ -18,14 +18,15 @@ namespace Kata
         }
 
         [TestMethod]
-        [DataRow("1", DisplayName = "Values {1}")]
-        public void Given_ValidRoll(string arrayOfDice)
+        [DataRow("1", 100, DisplayName = "Values {1}")]
+        [DataRow("5", 50, DisplayName = "Values {5}")]
+        public void Given_ValidRoll(string arrayOfDice, int expectedScore)
         {
             List<int> diceValues = arrayOfDice.Split(',').Select(d => int.Parse(d)).ToList();
         
             int score = this.greed.Score(diceValues);
 
-            Assert.AreEqual(100, score);
+            Assert.AreEqual(expectedScore, score);
         }
 
         [TestMethod]
