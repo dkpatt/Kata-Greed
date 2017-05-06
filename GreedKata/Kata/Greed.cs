@@ -43,6 +43,11 @@ namespace Kata
                     return 100;
                 }
 
+                if(ones.Count == 3)
+                {
+                    return 1000;
+                }
+
                 if(fives.Count == 1)
                 {
                     return 50;
