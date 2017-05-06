@@ -36,6 +36,7 @@ namespace Kata
             if(this.CheckIfRollIsValid(diceValues))
             {
                 List<int> ones = diceValues.Where(d => d == 1).ToList();
+                List<int> twos = diceValues.Where(d => d == 2).ToList();
                 List<int> fives = diceValues.Where(d => d == 5).ToList();
 
                 if(ones.Count == 1)
@@ -46,6 +47,11 @@ namespace Kata
                 if(ones.Count == 3)
                 {
                     return 1000;
+                }
+
+                if(twos.Count == 3)
+                {
+                    return 200;
                 }
 
                 if(fives.Count == 1)
