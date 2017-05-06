@@ -38,7 +38,13 @@ namespace Kata
             if(this.CheckIfRollIsValid(dice))
             {
                 int scoreFromSingles = this.GetScoreFromSingles(dice);
+
                 int scoreFromTriples = this.GetScoreFromTriples(dice);
+
+                if(this.Has4ofakind(dice))
+                {
+                    scoreFromTriples = scoreFromTriples * 2;
+                }
 
                 score = 
                         scoreFromSingles +
@@ -102,6 +108,13 @@ namespace Kata
             }
 
             return score;
+        }
+
+        private bool Has4ofakind(List<int> dice)
+        {
+            var groups = dice.GroupBy(x => x);
+
+            return groups.Any(g => g.Count() == 4);
         }
     }
 }
