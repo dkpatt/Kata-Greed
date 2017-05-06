@@ -33,26 +33,19 @@ namespace Kata
 
         public int Score(List<int> dice)
         {
+            int score = 0;
+
             if(this.CheckIfRollIsValid(dice))
             {
-                List<int> ones = dice.Where(d => d == 1).ToList();
-                List<int> fives = dice.Where(d => d == 5).ToList();
-
-                if (ones.Count == 1)
-                {
-                    return 100;
-                }
-                
-                if(fives.Count == 1)
-                {
-                    return 50;
-                }
-
+                int scoreFromSingles = this.GetScoreFromSingles(dice);
                 int scoreFromTriples = this.GetScoreFromTriples(dice);
-                return scoreFromTriples;
+
+                score = 
+                        scoreFromSingles +
+                        scoreFromTriples;
             }
 
-            return 0;
+            return score;
         }
 
         private bool CheckIfRollIsValid(List<int> dice)
@@ -69,6 +62,26 @@ namespace Kata
             }
 
             return true;
+        }
+
+        private int GetScoreFromSingles(List<int> dice)
+        {
+            int score = 0;
+
+            List<int> ones = dice.Where(d => d == 1).ToList();
+            List<int> fives = dice.Where(d => d == 5).ToList();
+
+            if (ones.Count == 1)
+            {
+                score += 100;
+            }
+
+            if (fives.Count == 1)
+            {
+                score += 50;
+            }
+
+            return score;
         }
 
         private int GetScoreFromTriples(List<int> dice)
