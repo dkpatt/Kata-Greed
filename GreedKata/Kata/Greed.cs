@@ -37,13 +37,15 @@ namespace Kata
             {
                 List<int> ones = diceValues.Where(d => d == 1).ToList();
                 List<int> twos = diceValues.Where(d => d == 2).ToList();
+                List<int> threes = diceValues.Where(d => d == 3).ToList();
+                List<int> fours = diceValues.Where(d => d == 4).ToList();
                 List<int> fives = diceValues.Where(d => d == 5).ToList();
+                List<int> sixes = diceValues.Where(d => d == 6).ToList();
 
-                if(ones.Count == 1)
+                if (ones.Count == 1)
                 {
                     return 100;
                 }
-
                 if(ones.Count == 3)
                 {
                     return 1000;
@@ -54,9 +56,28 @@ namespace Kata
                     return 200;
                 }
 
+                if (threes.Count == 3)
+                {
+                    return 300;
+                }
+
+                if(fours.Count ==3 )
+                {
+                    return 400;
+                }
+                                
                 if(fives.Count == 1)
                 {
                     return 50;
+                }
+                if(fives.Count == 3)
+                {
+                    return 500;
+                }
+
+                if (sixes.Count == 3)
+                {
+                    return 600;
                 }
             }
 

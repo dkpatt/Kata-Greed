@@ -22,7 +22,10 @@ namespace Kata
         [DataRow("5", 50, DisplayName = "Values {5}")]
         [DataRow("1,1,1", 1000, DisplayName = "Values {1,1,1}")]
         [DataRow("2,2,2", 200, DisplayName = "Values {2,2,2}")]
-
+        [DataRow("3,3,3", 300, DisplayName = "Values {3,3,3}")]
+        [DataRow("4,4,4", 400, DisplayName = "Values {4,4,4}")]
+        [DataRow("5,5,5", 500, DisplayName = "Values {5,5,5}")]
+        [DataRow("6,6,6", 600, DisplayName = "Values {6,6,6}")]
         public void Given_ValidRoll(string arrayOfDice, int expectedScore)
         {
             List<int> diceValues = arrayOfDice.Split(',').Select(d => int.Parse(d)).ToList();
