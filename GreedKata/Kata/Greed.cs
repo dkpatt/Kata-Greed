@@ -71,14 +71,14 @@ namespace Kata
             List<int> ones = dice.Where(d => d == 1).ToList();
             List<int> fives = dice.Where(d => d == 5).ToList();
 
-            if (ones.Count == 1)
+            if (ones.Count == 1 || ones.Count == 2)
             {
-                score += 100;
+                score = (100 * ones.Count);
             }
 
-            if (fives.Count == 1)
+            if (fives.Count == 1 || fives.Count == 2)
             {
-                score += 50;
+                score += (50 * fives.Count);
             }
 
             return score;

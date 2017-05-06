@@ -19,7 +19,10 @@ namespace Kata
 
         [TestMethod]
         [DataRow("1", 100, DisplayName = "Values {1}")]
+        [DataRow("1,1", 200, DisplayName = "Values {1,1}")]
         [DataRow("5", 50, DisplayName = "Values {5}")]
+        [DataRow("5,5", 100, DisplayName = "Values {5,5}")]
+        [DataRow("1,1,5,5", 300, DisplayName = "Values {1,1,5,5}")]
         [DataRow("1,1,1", 1000, DisplayName = "Values {1,1,1}")]
         [DataRow("2,2,2", 200, DisplayName = "Values {2,2,2}")]
         [DataRow("3,3,3", 300, DisplayName = "Values {3,3,3}")]
